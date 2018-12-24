@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">kamalpanditpatil</string>
+    <string name="title_activity_admin_main_menu">AdminMainMenu</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <!--user Strings-->
+    <string name="ATTENDANCE">ATTENDANCE</string>
+    <string name="PRODUCTION">PRODUCTION</string>
+    <string name="EDITING">EDITING</string>
+    <string name="REGISTRATION">REGISTRATION</string>
+    <string name="ECONOMICS">ECONOMICS</string>
+    <string name="login">Login</string>
+    <string name="title_activity_production_admin_menu">productionAdminMenuActivity</string>
+    <string name="title_activity_production_main_menu">ProductionMainMenu</string>
+    <string name="GRINDING">GRINDING</string>
+    <string name="CASING">CASING</string>
+    <string name="CNC">CNC</string>
+    <string name="Q_AND_A">Q AND A</string>
+    <string-array name="Casing">
+        <item>4 and half inch</item>
+        <item>4 inch</item>
+        <item>5 inch</item>
+        <item>6 inch</item>
+        <item>7 inch</item>
+        <item>8 inch</item>
+        <item>9 inch</item>
+        <item>10 inch</item>
+        <item>12 inch</item>
+    </string-array>
+    <string-array name="Coupler">
+        <item>1 inch coupler</item>
+        <item>1 1:4 inch coupler</item>
+        <item>1 1:4 inch cord coupler</item>
+        <item>1 1:2 inch cord  coupler</item>
+        <item>1 1:4 inch impct coupler</item>
+        <item>1 1:2 inch coupler</item>
+        <item>2 inch coupler</item>
+        <item>2 inch cord coupler</item>
+        <item>2 inch eco coupler</item>
+        <item>2 inch eco cord  coupler</item>
+        <item>2 inch std cord  coupler</item>
+        <item>2 1:4 inch coupler</item>
+        <item>2 1:2 inch coupler</item>
+        <item>2 1:2 inch  cord coupler</item>
+        <item>2 1:2 inch B side coupler</item>
+        <item>4 inch coupler</item>
+        <item>4 inch cord coupler</item>
+    </string-array>
+    <string name="submit">SUBMIT</string>
+    <string name="enterProduction">ENTER  PRODUCTION HERE</string>
+</resources>

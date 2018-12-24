@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_admin_editing"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/EDITING" />
+
+    <item
+        android:id="@+id/navigation_admin_production"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/PRODUCTION" />
+
+    <item
+        android:id="@+id/navigation__admin_attendance"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/ATTENDANCE" />
+    <item
+        android:id="@+id/navigation_economics"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/ECONOMICS"/>
+
+</menu>

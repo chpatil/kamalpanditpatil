@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.supervisor.Production.GrindingActivity">
+    <include
+        android:id="@+id/grindingToolbar"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/GrindingProductionTextView"
+        style="@style/ThemeOverlay.MyTextDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/PRODUCTION"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/DateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true" />
+
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/GrindingProductionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:hint="@string/enterProduction"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/GrindingSubmitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/submit" />
+
+
+
+
+</LinearLayout>
