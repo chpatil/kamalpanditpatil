@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,11 +24,13 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.kpp.kamalpanditpatil.models.worker_model;
 import com.kpp.kamalpanditpatil.ui.activities.login_page;
 import com.kpp.kamalpanditpatil.ui.activities.supervisor.Base.MenuActivity;
 import com.kpp.kamalpanditpatil.ui.activities.utilities.workerDataDialog;
 
 import com.android.volley.Response;
+
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -52,7 +55,7 @@ public class worker_list extends AppCompatActivity {
 
     // Search EditText
     EditText inputSearch;
-    String code,message;
+    String code,message,name;
     AlertDialog.Builder builder;
 
 
@@ -69,6 +72,7 @@ public class worker_list extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.workerListToolbar);
         toolbar.setTitle("WORKERS");
         setSupportActionBar(toolbar);
+        workerlist=new ArrayList<String>();
 
         lv = (ListView) findViewById(R.id.list_view);
         inputSearch = (EditText) findViewById(R.id.inputsearch);
@@ -96,24 +100,25 @@ public class worker_list extends AppCompatActivity {
                         builder.setTitle("0");
                         dispalyAlert(jsonObject.getString("message"));
                     } else if (code.equals("1")) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
+//
+                        lv.setAdapter(adapter);
+                                JSONArray jAry=new JSONArray(response);
+                                for(int i=1;i<jAry.length();i++)
+                                {
+                                    JSONObject jsonObject1=jsonArray.getJSONObject(i);
+                                    worker_model worker=new worker_model();
+                                    worker.setName(jsonObject1.getString("name"));
+                                    String name=worker.getName();
+                                    workerlist.add(name);
+                                    adapter.notifyDataSetChanged();
+                                }
 
-                                JSONObject obj = jsonArray.getJSONObject(i);
-                                // adding worker to movies array
-                                workerlist.add(obj.getString("name"));
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
                         hidePDialog();
+
 
                         // notifying list adapter about data changes
                         // so that it renders the list view with updated data
-                        lv.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
+
 
 
                     }
@@ -128,54 +133,8 @@ public class worker_list extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-
-
         });
         com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(this).addtoRequestQueue(stringRequest);
-
-
-//        JsonArrayRequest workerReq = new JsonArrayRequest(constants.WORKERLIST,
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        Log.d(TAG, response.toString());
-//                        onResponse(String response){
-//
-//                        };
-//
-//                        // Parsing json
-//                        for (int i = 0; i < response.length(); i++) {
-//                            try {
-//
-//                                JSONObject obj = response.getJSONObject(i);
-//                                com.kpp.kamalpanditpatil.models.worker_model worker = new com.kpp.kamalpanditpatil.models.worker_model();
-//                                worker.setName(obj.getString("name"));
-//
-//
-//                                // adding worker to movies array
-//                                workerlist.add(worker.getName());
-//
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                        }
-//                        hidePDialog();
-//
-//                        // notifying list adapter about data changes
-//                        // so that it renders the list view with updated data
-//                        lv.setAdapter(adapter);
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d("workerlist", "Error: " + error.getMessage());
-//                hidePDialog();
-//
-//            }
-//        });
-
         // Adding request to request queue
 
 
@@ -208,19 +167,11 @@ public class worker_list extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // TODO Auto-generated method stub
-                String value = adapter.getItem(position);
-                workerDataDialog.setValue(value);
-                workerDataDialog workerDataDialog = new workerDataDialog(worker_list.this);
-                workerDataDialog.show();
-
-
-//                String value=adapter.getItem(position);
-//                Intent intent=new Intent(worker_list.this,updationActivity.class);
-//                intent.putExtra("name",value);
-//                startActivity(intent);
-//
-//                startActivity(intent);
-//                Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
+                lv.setAdapter(adapter);
+               String value = adapter.getItem(position);
+               Intent intent=new Intent(worker_list.this,WorkerDetailsDisplay.class);
+               intent.putExtra("value",value);
+               startActivity(intent);
 
             }
         });
@@ -265,5 +216,6 @@ public class worker_list extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.adminnavigation, menu);
         return true;
     }
+
     }
 

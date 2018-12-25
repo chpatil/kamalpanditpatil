@@ -43,7 +43,8 @@
         <activity android:name=".ui.activities.admin.Production.AdminCasingActivty" />
         <activity android:name=".ui.activities.admin.Production.AdminGrindingActivity" />
         <activity android:name=".ui.activities.admin.Production.AdminCNCActivity" />
-        <activity android:name=".ui.activities.admin.Production.AdminQandAActivity"></activity>
+        <activity android:name=".ui.activities.admin.Production.AdminQandAActivity" />
+        <activity android:name=".ui.activities.admin.Base.WorkerDetailsDisplay"></activity>
     </application>
 
 </manifest>

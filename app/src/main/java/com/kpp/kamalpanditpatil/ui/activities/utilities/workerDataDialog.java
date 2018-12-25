@@ -49,9 +49,11 @@ public class workerDataDialog extends Dialog {
         LayoutInflater inflater=this.getLayoutInflater();
         View view =inflater.inflate(R.layout.workerdatadialog,null);
         lv=view.findViewById(R.id.workerDialogList);
+        pDialog=new ProgressDialog(getContext());
         // Showing progress dialog before making http request
         pDialog.setMessage("Loading...");
         pDialog.show();
+        adapter = new ArrayAdapter<String>(getContext(), R.layout.list_item, R.id.product_name, workerDataList);
         lv.setAdapter(adapter);
         JsonArrayRequest workerReq = new JsonArrayRequest(constants.WORKERDATA,
                 new Response.Listener<JSONArray>() {
@@ -89,7 +91,7 @@ public class workerDataDialog extends Dialog {
                                 workerDataList.add(constants.workerDisplayarray[8]+"\t"+worker.getAccountno());
                                 workerDataList.add(constants.workerDisplayarray[9]+"\t"+worker.getPF());
                                 workerDataList.add(constants.workerDisplayarray[10]+"\t"+worker.getESIC());
-
+                                adapter.notifyDataSetChanged();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -99,7 +101,6 @@ public class workerDataDialog extends Dialog {
 
                         // notifying list adapter about data changes
                         // so that it renders the list view with updated data
-                        adapter.notifyDataSetChanged();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -120,7 +121,7 @@ public class workerDataDialog extends Dialog {
         // Adding request to request queue
         com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(getContext()).addtoRequestQueue(workerReq);
 
-        adapter = new ArrayAdapter<String>(getContext(), R.layout.list_item, R.id.product_name, workerDataList);
+
         pDialog = new ProgressDialog(getContext());
 
         builder.setView(view)
@@ -136,8 +137,8 @@ public class workerDataDialog extends Dialog {
         builder.show();
 
     }
-    public static void setValue(String name){
-        name=name;
+    public void setValue(String name){
+        this.name=name;
     }
     }
 

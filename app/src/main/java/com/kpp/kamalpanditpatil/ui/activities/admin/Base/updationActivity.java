@@ -33,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,6 +80,7 @@ public class updationActivity extends AppCompatActivity {
     Spinner _spinnerDepartment;
     int id_no,count=0;
     AlertDialog.Builder builder;
+    ArrayList<String> workerdata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final String TAG="Updataion Activty "+value;
@@ -88,11 +90,9 @@ public class updationActivity extends AppCompatActivity {
         Toolbar toolbar=findViewById(R.id.updationgToolbar);
         toolbar.setTitle("UPDATION");
         setSupportActionBar(toolbar);
-        value=getIntent().getStringExtra("name");
+        workerdata=getIntent().getStringArrayListExtra(("workerData"));
         builder=new AlertDialog.Builder(this);
-        if (count==0){
-            serverRetrieval();
-        }
+            Retrieval();
 
         //spinner Department Defination
         _spinnerDepartment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -175,32 +175,21 @@ public class updationActivity extends AppCompatActivity {
         });
     }
 
-    private void serverRetrieval() {
-        JsonArrayRequest workerReq = new JsonArrayRequest(constants.WORKERDATA,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d("upadation activity", response.toString());
-
-                        // Parsing json
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-
-                                JSONObject obj = response.getJSONObject(i);
-                                worker_model worker = (worker_model) obj.get("result");
-                                aadhar=worker.getAadhar();
-                                gender=worker.getGender();
-                                accountno=worker.getAccountno();
-                                IFSC_code=worker.getIFSC_code();
-                                department=worker.getDepartment();
-                                address=worker.getAddress();
-                                id=worker.getId_no();
-                                PF=worker.getPF();
-                                ESIC=worker.getESIC();
-                                bankname=worker.getBankname();
+    private void Retrieval() {
+                                name=workerdata.get(0);
+                                aadhar=workerdata.get(4);
+                                gender=workerdata.get(1);
+                                accountno=workerdata.get(7);
+                                IFSC_code=workerdata.get(6);
+                                department=workerdata.get(3);
+                                address=workerdata.get(2);
+                                id= Integer.parseInt(workerdata.get(10));
+                                PF=workerdata.get(8);
+                                ESIC=workerdata.get(9);
+                                bankname=workerdata.get(5);
                                 _nameText. setText(name);
                                 _addressText.setText(address);
-                                _idno.setText(id);
+                                _idno.setText(String.valueOf(id));
                                 _Aadhar.setText(aadhar);
                                 _BankName.setText(bankname);
                                 _Ifsc.setText(IFSC_code);
@@ -217,30 +206,6 @@ public class updationActivity extends AppCompatActivity {
                                     case "MALE": _spinnerGender.setSelection(0);break;
                                     case "FEMALE": _spinnerGender.setSelection(1);break;
                                 }
-
-
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("updation activity", "Error: " + error.getMessage());
-
-            }
-        });
-
-        // Adding request to request queue
-        com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(this).addtoRequestQueue(workerReq);
-
-
-        count=1;
     }
 
 
@@ -254,8 +219,8 @@ public class updationActivity extends AppCompatActivity {
                             JSONObject jsonObject=jsonArray.getJSONObject(0);
                             String code=jsonObject.getString("code");
                             String message =jsonObject.getString("message");
-                            builder.setTitle("Server Response ...");
-                            builder.setMessage(message);
+                            Toast.makeText(updationActivity.this, message, Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(updationActivity.this,AdminMainMenu.class));
 
                         } catch (JSONException e) {
                             e.printStackTrace();

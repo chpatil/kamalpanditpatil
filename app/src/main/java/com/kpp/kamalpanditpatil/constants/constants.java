@@ -32,7 +32,7 @@ public class constants {
     public static final String REGISTRATION ="REGISTRATION";
     public static final String ECONOMICS="ECONOMICS";
     public static final String[] userRoleString = new String[]{"ADMIN", "SUPERVISOR"};
-    public static final String[] workerDisplayarray = new String[]{"Name:","Gender:","Address:","ID no:","Department:","Aadhar:","Bank name:","IFSC code:","Account no","PF number","ESIC number"};
+    public static final String[] workerDisplayarray = new String[]{"Name:","Gender:","Address:","ID no:","Department:","Aadhar:","Bank name:","IFSC code:","Account no:","PF number:","ESIC number:"};
     public static final String[] genderRoleString = new String[]{"MALE", "FEMALE"};
     public static final String[] departmentRoleString = new String[]{"CASING", "CNC", "GRINDING", "QUALITY AND ASSURANCE"};
 

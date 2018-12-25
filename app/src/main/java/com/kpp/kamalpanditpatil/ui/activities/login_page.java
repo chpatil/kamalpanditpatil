@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -77,8 +78,7 @@ public class login_page extends AppCompatActivity {
                 user=_userText.getText().toString();
                 pass=_passwordText.getText().toString();
                 if(user.equals("")||pass.equals("")){
-                    builder.setTitle("Something went wrong");
-                    dispalyAlert("Enter valid username and password");
+                    Toast.makeText(login_page.this, "kogin page credentials cannot be empty", Toast.LENGTH_SHORT).show();
                 }else{
                     StringRequest stringRequest=new StringRequest(Request.Method.POST, constants.LOGINURL, new Response.Listener<String>() {
                         @Override
@@ -89,8 +89,7 @@ public class login_page extends AppCompatActivity {
                                 JSONObject jsonObject=jsonArray.getJSONObject(0);
                                 code=jsonObject.getString("code");
                                 if(code.equals("login_failed")){
-                                    builder.setTitle("Login Error ....");
-                                    dispalyAlert(jsonObject.getString("message"));
+                                    Toast.makeText(login_page.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 }else if(userrole.equals("ADMIN")&&code.equals("login_success")){
                                     startActivity(new Intent(login_page.this,AdminMainMenu.class));
                                 } else if (userrole.equals("SUPERVISOR")&&code.equals("login_success")) {
@@ -125,20 +124,6 @@ public class login_page extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    private  void dispalyAlert(String Message){
-        builder.setMessage(Message);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                _userText.setText("");
-                _passwordText.setText("");
-            }
-        });
-        AlertDialog alertDialog=builder.create();
-        alertDialog.show();
     }
     @Override
     public void onBackPressed() {
