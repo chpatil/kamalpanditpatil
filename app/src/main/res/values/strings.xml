@@ -29,25 +29,29 @@
         <item>10 inch</item>
         <item>12 inch</item>
     </string-array>
-    <string-array name="Coupler">
+    <string-array name="CNC">
         <item>1 inch coupler</item>
         <item>1 1:4 inch coupler</item>
-        <item>1 1:4 inch cord coupler</item>
-        <item>1 1:2 inch cord  coupler</item>
-        <item>1 1:4 inch impct coupler</item>
         <item>1 1:2 inch coupler</item>
         <item>2 inch coupler</item>
-        <item>2 inch cord coupler</item>
-        <item>2 inch eco coupler</item>
-        <item>2 inch eco cord  coupler</item>
-        <item>2 inch std cord  coupler</item>
-        <item>2 1:4 inch coupler</item>
         <item>2 1:2 inch coupler</item>
-        <item>2 1:2 inch  cord coupler</item>
-        <item>2 1:2 inch B side coupler</item>
+        <item>3 inch coupler</item>
         <item>4 inch coupler</item>
-        <item>4 inch cord coupler</item>
+        <item>4 inch coupler sample</item>
+        <item>1 inch pipe</item>
+        <item>1 1:4 inch pipe</item>
+        <item>1 1:2 inch pipe</item>
+        <item>2 inch pipe</item>
+        <item>2 1:2 inch pipe</item>
+        <item>3 inch pipe</item>
+        <item>4 inch pipe</item>
+        <item>4 inch pipe sample</item>
     </string-array>
+
     <string name="submit">SUBMIT</string>
     <string name="enterProduction">ENTER  PRODUCTION HERE</string>
+    <string name="title_activity_attendance_base">AttendanceBaseActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

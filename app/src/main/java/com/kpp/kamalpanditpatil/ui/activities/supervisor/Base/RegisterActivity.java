@@ -5,8 +5,9 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,9 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -157,8 +156,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
 
-
-
         });
 
 
@@ -167,6 +164,13 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
+        finish();
+    }
+
 
     private void serverSignup() {
         StringRequest stringRequest= new StringRequest(Request.Method.POST, constants.WORKERREGISTRATION,
@@ -198,7 +202,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 final String name = _nameText.getText().toString();
                 final String address = _addressText.getText().toString();
                 final String idno = _idno.getText().toString();

@@ -17,6 +17,13 @@
         android:id="@+id/dateButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/CasingWorkerwiseProduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PERSON WISE PRODUCTION" />
+
     <ListView
         android:id="@+id/casing_listview"
         android:layout_width="match_parent"

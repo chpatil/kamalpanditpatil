@@ -44,7 +44,15 @@
         <activity android:name=".ui.activities.admin.Production.AdminGrindingActivity" />
         <activity android:name=".ui.activities.admin.Production.AdminCNCActivity" />
         <activity android:name=".ui.activities.admin.Production.AdminQandAActivity" />
-        <activity android:name=".ui.activities.admin.Base.WorkerDetailsDisplay"></activity>
+        <activity android:name=".ui.activities.admin.Base.WorkerDetailsDisplay" />
+        <activity android:name=".ui.activities.supervisor.Production.CasingWorkerList" />
+        <activity android:name=".ui.activities.supervisor.Production.CasingWorkerwiseProduction" />
+        <activity android:name=".ui.activities.supervisor.Production.CNCWorkerList" />
+        <activity android:name=".ui.activities.supervisor.Production.CNCWorkerWiseProduction" />
+        <activity
+            android:name=".ui.activities.supervisor.Attendance.AttendanceBaseActivity"
+            android:label="@string/title_activity_attendance_base" />
+        <activity android:name=".ui.activities.supervisor.Attendance.AttendanceCasingActivity"></activity>
     </application>
 
 </manifest>

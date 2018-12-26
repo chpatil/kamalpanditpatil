@@ -5,8 +5,9 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,18 +17,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
-import com.kpp.kamalpanditpatil.models.worker_model;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -234,7 +230,7 @@ public class updationActivity extends AppCompatActivity {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 final String name = _nameText.getText().toString();
                 final String address = _addressText.getText().toString();
                 final String idno = _idno.getText().toString();
@@ -330,4 +326,10 @@ public class updationActivity extends AppCompatActivity {
 
         return valid;
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(updationActivity.this, AdminMainMenu.class));
+    }
+
 }

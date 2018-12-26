@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -10,56 +9,22 @@
         android:id="@+id/CNCtoolbar"
         layout="@layout/toolbar"/>
 
-    <RelativeLayout
-        android:layout_width="394dp"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="0dp">
+    <Button
+        android:id="@+id/PresonwiseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Person wise attendace" />
 
-        <Button
-            android:id="@+id/DatecncButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
-            android:text="Button" />
+    <Button
+        android:id="@+id/dateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:text="Date" />
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="46dp"
-            android:background="@color/design_default_color_primary_dark"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/design_default_color_primary"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/colorPrimary" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tablayout"
-            android:layout_marginTop="0dp"
-            android:background="@color/colorPrimary"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="11dp"
-            android:text="Button" />
-
-    </RelativeLayout>
-
-
+    <ListView
+        android:id="@+id/cncNamesListview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

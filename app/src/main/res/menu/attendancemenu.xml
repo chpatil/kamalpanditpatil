@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/attendance_navigation_casing"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/CASING" />
+
+    <item
+        android:id="@+id/attendance_navigation_cnc"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/CNC" />
+
+    <item
+        android:id="@+id/attendance_navigation_grinding"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/GRINDING" />
+    <item
+        android:id="@+id/attendance_navigation_qanda"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/Q_AND_A" />
+
+</menu>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/casingworkerListToolbar"
+        layout="@layout/toolbar" />
+
+    <!-- Editext for Search -->
+
+    <!-- List View -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/inputsearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="search workers ...."
+            android:inputType="textAutoComplete" />
+    </android.support.design.widget.TextInputLayout>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,10 +1,9 @@
 package com.kpp.kamalpanditpatil.ui.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -92,8 +90,10 @@ public class login_page extends AppCompatActivity {
                                     Toast.makeText(login_page.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 }else if(userrole.equals("ADMIN")&&code.equals("login_success")){
                                     startActivity(new Intent(login_page.this,AdminMainMenu.class));
+                                    finish();
                                 } else if (userrole.equals("SUPERVISOR")&&code.equals("login_success")) {
                                     startActivity(new Intent(login_page.this,MenuActivity.class));
+                                    finish();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -111,7 +111,7 @@ public class login_page extends AppCompatActivity {
 
                     }){
                         @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
+                        protected Map<String, String> getParams() {
                             Map<String,String> datamap=new HashMap<String,String>();
                             datamap.put("userrole",userrole);
                             datamap.put("username",user);

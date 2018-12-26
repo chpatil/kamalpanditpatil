@@ -1,20 +1,17 @@
 package com.kpp.kamalpanditpatil.ui.activities.admin.Base;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
@@ -109,7 +106,7 @@ public class WorkerDetailsDisplay extends AppCompatActivity {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 HashMap<String,String> datamap=new HashMap<String,String>();
                 datamap.put("name",value);
                 return datamap;
@@ -124,5 +121,10 @@ public class WorkerDetailsDisplay extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, worker_list.class));
     }
 }

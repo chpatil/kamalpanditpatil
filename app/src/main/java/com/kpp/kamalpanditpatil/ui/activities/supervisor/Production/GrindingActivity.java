@@ -4,8 +4,10 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -51,11 +51,29 @@ public class GrindingActivity extends AppCompatActivity {
     static final int Dialog_id=0;
     String code,message;
     android.support.v7.app.AlertDialog.Builder builder;
+    String GrindingProduction;
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+            selectedMonth = selectedMonth + 1;
+            if (selectedDay < 10) {
+                dayS = "0" + String.valueOf(selectedDay);
 
+            } else {
+                dayS = String.valueOf(selectedDay);
+            }
+            Date = selectedYear + "-" + (selectedMonth) + "-" + dayS;
+            month_x = selectedMonth;
+            year_x = selectedYear;
+            dateButton.setText(selectedYear + "-" + (selectedMonth) + "-" + dayS);
+            dateDatabase = selectedMonth + "-" + selectedYear;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        builder = new AlertDialog.Builder(this);
         setContentView(R.layout.activity_grinding);
         ButterKnife.bind(this);
         Toolbar toolbar=findViewById(R.id.grindingToolbar);
@@ -72,12 +90,12 @@ public class GrindingActivity extends AppCompatActivity {
             dayS =String.valueOf(day_x);
         }
         dateDatabase=month_x+"-"+year_x;
-        Date=dayS+"-"+month_x+"-"+year_x;
+        Date = year_x + "-" + month_x + "-" + dayS;
         dateButton.setText(Date);
         grindingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String GrindingProduction = String.valueOf(Grindingproduction.getText());
+                GrindingProduction = String.valueOf(Grindingproduction.getText());
                 if (TextUtils.isEmpty(GrindingProduction)) {
                     Grindingproduction.setError("It cannot be empty");
                 } else {
@@ -95,7 +113,9 @@ public class GrindingActivity extends AppCompatActivity {
                                     dispalyAlert(message);
                                     update();
                                 } else if (code.equals("1")) {
+                                    Toast.makeText(GrindingActivity.this, "submitted successfully", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(GrindingActivity.this,MenuActivity.class));
+                                    finish();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -115,17 +135,15 @@ public class GrindingActivity extends AppCompatActivity {
 
                     }){
                         @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
+                        protected Map<String, String> getParams() {
                             String production=GrindingproductionTextview.getText().toString();
                             Map<String,String> datamap=new HashMap<String,String>();
-                            datamap.put("production",production);
+                            datamap.put("production", GrindingProduction);
                             datamap.put("date",Date);
                             return datamap;
                         }
                     };
                     com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(GrindingActivity.this).addtoRequestQueue(stringRequest);
-
-                    startActivity(new Intent(GrindingActivity.this,MenuActivity.class));
                 }
             }});
 
@@ -143,6 +161,13 @@ public class GrindingActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    @Deprecated
+    protected Dialog onCreateDialog(int id) {
+        return new DatePickerDialog(this, datePickerListener, dyear, month, day);
+    }
+
     private void update(){
         StringRequest stringRequest=new StringRequest(Request.Method.POST, constants.GRINDINGUPDATEURL, new Response.Listener<String>() {
             @Override
@@ -158,6 +183,7 @@ public class GrindingActivity extends AppCompatActivity {
                         dispalyAlert(message);
                     } else if (code.equals("1")) {
                         startActivity(new Intent(GrindingActivity.this,MenuActivity.class));
+                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -176,10 +202,10 @@ public class GrindingActivity extends AppCompatActivity {
 
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                String production=GrindingproductionTextview.getText().toString();
+            protected Map<String, String> getParams() {
+                GrindingProduction = GrindingproductionTextview.getText().toString();
                 Map<String,String> datamap=new HashMap<String,String>();
-                datamap.put("production",production);
+                datamap.put("production", GrindingProduction);
                 datamap.put("date",Date);
                 return datamap;
             }
@@ -188,31 +214,6 @@ public class GrindingActivity extends AppCompatActivity {
 
         startActivity(new Intent(GrindingActivity.this,MenuActivity.class));
     }
-
-    @Override
-    @Deprecated
-    protected Dialog onCreateDialog(int id) {
-        return new DatePickerDialog(this, datePickerListener, dyear, month, day);
-    }
-
-    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
-        public void onDateSet(DatePicker view, int selectedYear,
-                              int selectedMonth, int selectedDay) {
-            selectedMonth = selectedMonth + 1;
-            if (selectedDay < 10) {
-                dayS ="0"+ String.valueOf(selectedDay);
-
-            } else {
-                dayS =String.valueOf( selectedDay);
-            }
-            Date = dayS + "-" + (selectedMonth) + "-" + selectedYear;
-            month_x=selectedMonth;
-            year_x=selectedYear;
-            dateButton.setText(dayS + "-" + (selectedMonth) + "-"
-                    + selectedYear);
-            dateDatabase = selectedMonth + "-" + selectedYear;
-        }
-    };
     private  void dispalyAlert(String Message){
         builder.setMessage(Message);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -223,5 +224,11 @@ public class GrindingActivity extends AppCompatActivity {
         });
         android.support.v7.app.AlertDialog alertDialog=builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, ProductionMainMenu.class));
+        finish();
     }
     }

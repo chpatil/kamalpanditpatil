@@ -24,7 +24,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
-import com.kpp.kamalpanditpatil.ui.activities.supervisor.Base.MenuActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,23 +36,19 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CNCActivity extends AppCompatActivity {
+public class CNCWorkerWiseProduction extends AppCompatActivity {
     static final int Dialog_id = 0;
-    @BindView(R.id.dateButton)
+    @BindView(R.id.dateProductionCasingButton)
     Button dateButton;
-    @BindView(R.id.cncNamesListview)
+    @BindView(R.id.casing_worker_listview)
     ListView casing_listview;
-    @BindView(R.id.PresonwiseButton)
-    Button PersonWiseProduction;
     String DatabaseDate, departmentname;
     String Date, Day;
     int year_x, month_x, day_x;
     int day, month, dyear;
-    String value, code, message;
+    String value, name, code, message;
     android.support.v7.app.AlertDialog.Builder builder;
     private EditText editTextProduction;
-    private EditText editTextDispach;
-    private EditText editTextVoucher_No;
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int selectedYear,
                               int selectedMonth, int selectedDay) {
@@ -64,21 +59,21 @@ public class CNCActivity extends AppCompatActivity {
             } else {
                 Day = String.valueOf(selectedDay);
             }
-            Date = Day + "-" + (selectedMonth) + "-" + selectedYear;
             month_x = selectedMonth;
             year_x = selectedYear;
             dateButton.setText(Day + "-" + (selectedMonth) + "-" + selectedYear);
-            DatabaseDate = year_x + "-" + month_x + "-" + Day;
+            DatabaseDate = selectedYear + "-" + (selectedMonth) + "-" + Day;
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cnc);
+        setContentView(R.layout.activity_cncworker_wise_production);
         ButterKnife.bind(this);
-        Toolbar toolbar=findViewById(R.id.CNCtoolbar);
-        toolbar.setTitle("C.N.C");
+        Toolbar toolbar = findViewById(R.id.casingWorkerProductiontoolbar);
+        name = getIntent().getStringExtra("value");
+        toolbar.setTitle(name);
         setSupportActionBar(toolbar);
         final Calendar cal = Calendar.getInstance();
         year_x = cal.get(Calendar.YEAR);
@@ -93,7 +88,7 @@ public class CNCActivity extends AppCompatActivity {
         DatabaseDate = year_x + "-" + month_x + "-" + Day;
         Date = Day + "-" + month_x + "-" + year_x;
         dateButton.setText(Date);
-        departmentname = "Casing";
+        departmentname = "CNC";
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
                 R.array.CNC, android.R.layout.simple_list_item_1);
         casing_listview.setAdapter(adapter);
@@ -115,30 +110,21 @@ public class CNCActivity extends AppCompatActivity {
                 showDialog(Dialog_id);
             }
         });
-        PersonWiseProduction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CNCActivity.this, CNCWorkerList.class));
-                finish();
-            }
-        });
     }
 
     private void opendialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(
                 this);
         LayoutInflater inflater = this.getLayoutInflater();
-        View view = inflater.inflate(R.layout.supervisor_producton_dialog, null);
+        View view = inflater.inflate(R.layout.cnc_casing_input_dialog, null);
         editTextProduction = view.findViewById(R.id.productionTypeEditTExt);
-        editTextDispach = view.findViewById(R.id.dispachProductionEditText);
-        editTextVoucher_No = view.findViewById(R.id.voucher_no_EditText);
         builder.setView(view)
                 .setTitle("CASING PRODUCTION").
                 setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
-                                StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.CNCURL, new Response.Listener<String>() {
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.CNCWORKERWISEPRODUCTION, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
 
@@ -151,7 +137,8 @@ public class CNCActivity extends AppCompatActivity {
                                                 builder.setTitle("submision Error ....");
                                                 dispalyAlert(message);
                                             } else if (code.equals("1")) {
-                                                startActivity(new Intent(CNCActivity.this, MenuActivity.class));
+                                                Toast.makeText(CNCWorkerWiseProduction.this, "submitted successfully", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(CNCWorkerWiseProduction.this, CNCWorkerList.class));
                                                 finish();
                                             }
                                         } catch (JSONException e) {
@@ -171,18 +158,15 @@ public class CNCActivity extends AppCompatActivity {
                                     @Override
                                     protected Map<String, String> getParams() {
                                         String production = editTextProduction.getText().toString();
-                                        String dispach = editTextDispach.getText().toString();
-                                        String voucher_no = editTextVoucher_No.getText().toString();
                                         Map<String, String> datamap = new HashMap<String, String>();
                                         datamap.put("production", production);
-                                        datamap.put("dispatch", dispach);
-                                        datamap.put("voucherno", voucher_no);
                                         datamap.put("type", value);
                                         datamap.put("date", DatabaseDate);
+                                        datamap.put("name", name);
                                         return datamap;
                                     }
                                 };
-                                com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(CNCActivity.this).addtoRequestQueue(stringRequest);
+                                com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(CNCWorkerWiseProduction.this).addtoRequestQueue(stringRequest);
 
                                 Toast.makeText(getApplicationContext(), "PRODUCTION IS SUBMITTED", Toast.LENGTH_LONG).show();
                             }
@@ -210,7 +194,7 @@ public class CNCActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, ProductionMainMenu.class));
+        startActivity(new Intent(this, CNCWorkerList.class));
         finish();
     }
 }

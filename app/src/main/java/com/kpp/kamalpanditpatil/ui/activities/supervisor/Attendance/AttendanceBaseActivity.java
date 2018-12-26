@@ -1,17 +1,17 @@
-package com.kpp.kamalpanditpatil.ui.activities.supervisor.Base;
+package com.kpp.kamalpanditpatil.ui.activities.supervisor.Attendance;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.kpp.kamalpanditpatil.R;
 
-public class MenuActivity extends AppCompatActivity {
+
+public class AttendanceBaseActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -21,18 +21,21 @@ public class MenuActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_registration:
-                    startActivity(new Intent(MenuActivity.this,RegisterActivity.class));
+                case R.id.attendance_navigation_casing:
+                    startActivity(new Intent(AttendanceBaseActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.CasingActivity.class));
                     finish();
-                    mTextMessage.setText(R.string.REGISTRATION);
                     return true;
-                case R.id.navigation_attendance:
-                    mTextMessage.setText(R.string.ATTENDANCE);
-                    return true;
-                case R.id.navigation_production:
-                    startActivity(new Intent(MenuActivity.this,com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.ProductionMainMenu.class));
+                case R.id.attendance_navigation_cnc:
+                    startActivity(new Intent(AttendanceBaseActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.CNCActivity.class));
                     finish();
-                    mTextMessage.setText(R.string.PRODUCTION);
+                    return true;
+                case R.id.attendance_navigation_grinding:
+                    startActivity(new Intent(AttendanceBaseActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.GrindingActivity.class));
+                    finish();
+                    return true;
+                case R.id.attendance_navigation_qanda:
+                    startActivity(new Intent(AttendanceBaseActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.QandAActivity.class));
+                    finish();
                     return true;
             }
             return false;
@@ -42,10 +45,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
-        Toolbar toolbar=findViewById(R.id.mainMenuToolbar);
-        toolbar.setTitle("SUPERVISOR");
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_attendance_base);
 
         mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation = findViewById(R.id.navigation);

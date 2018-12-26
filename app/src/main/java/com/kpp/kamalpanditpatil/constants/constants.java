@@ -1,7 +1,5 @@
 package com.kpp.kamalpanditpatil.constants;
 
-import com.android.volley.toolbox.StringRequest;
-
 public class constants {
     /**
      * Server url
@@ -10,15 +8,18 @@ public class constants {
     public static final String LOGINURL = "https://chippip.000webhostapp.com/php/basic/loginsup.php";
     public static final String WORKERLIST="https://chippip.000webhostapp.com/php/basic/workernamedisplay.php";
     public static final String WORKERDATA="https://chippip.000webhostapp.com/php/basic/workerdetailsdisplay.php";
-//    public static final String INSERTATTEND = "https://chippip.000webhostapp.com/php/insertAttendance.php";
-//    public static final String VIEWATTENDANCE = "https://chippip.000webhostapp.com/php/viewAttendance.php";
-//    public static final String QUICKATTENDANCE = "https://chippip.000webhostapp.com/php/quickAttendance.php";
     public static final String WORKERREGISTRATION="https://chippip.000webhostapp.com/php/basic/workerreg.php";
     public static final String WORKERUPDATION ="https://chippip.000webhostapp.com/php/basic/workerupdate.php" ;
-    public static final String CASINGURL ="" ;
+    public static final String CASINGURL = "https://chippip.000webhostapp.com/php/basic/casingtotalproduction.php";
     public static final String CASINGUPDATEURL ="" ;
     public static final String GRINDINGUPDATEURL ="" ;
-    public static final String GRINDINGURL ="" ;
+    public static final String GRINDINGURL = "https://chippip.000webhostapp.com/php/basic/grindinginsert.php";
+    public static final String CASINGWORKERLIST = "https://chippip.000webhostapp.com/php/basic/casingnames.php";
+    public static final String CASINGWORKERWISEPRODUCTION = "https://chippip.000webhostapp.com/php/basic/casingworkerinsert.php";
+    public static final String CNCURL = "https://chippip.000webhostapp.com/php/basic/cnctotalproduction.php";
+    public static final String CNCWORKERWISEPRODUCTION = "https://chippip.000webhostapp.com/php/basic/cncworkerinsert.php";
+    public static final String CNCWORKERLIST = "https://chippip.000webhostapp.com/php/basic/cncnames.php";
+
     /**
      * pref
      */
@@ -38,8 +39,9 @@ public class constants {
 
     public static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
 
-
-
 }
+
+
+
 
 
