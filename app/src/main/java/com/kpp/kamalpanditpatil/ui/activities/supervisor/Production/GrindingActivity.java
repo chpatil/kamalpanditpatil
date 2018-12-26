@@ -114,7 +114,7 @@ public class GrindingActivity extends AppCompatActivity {
                                     update();
                                 } else if (code.equals("1")) {
                                     Toast.makeText(GrindingActivity.this, "submitted successfully", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(GrindingActivity.this,MenuActivity.class));
+                                    startActivity(new Intent(GrindingActivity.this, ProductionMainMenu.class));
                                     finish();
                                 }
                             } catch (JSONException e) {
@@ -182,7 +182,7 @@ public class GrindingActivity extends AppCompatActivity {
                         builder.setTitle("submision Error ....");
                         dispalyAlert(message);
                     } else if (code.equals("1")) {
-                        startActivity(new Intent(GrindingActivity.this,MenuActivity.class));
+                        startActivity(new Intent(GrindingActivity.this, ProductionMainMenu.class));
                         finish();
                     }
                 } catch (JSONException e) {

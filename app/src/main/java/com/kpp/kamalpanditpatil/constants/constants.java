@@ -25,6 +25,12 @@ public class constants {
     public static final String ATTENDANCEGRINDINGINGWORKERLIST = "https://chippip.000webhostapp.com/php/basic/grindingnames.php ";
     public static final String ATTENDANCEQANDAWORKERLIST = "https://chippip.000webhostapp.com/php/basic/QandAnames.php";
     public static final String QANDAPRODUCTION = "https://chippip.000webhostapp.com/php/basic/Q&Apresentnames.php";
+    public static final String ATTENDANCEDELETE = "http://chippip.000webhostapp.com/php/basic/deleteattendance.php";
+    public static final String GRINDINGDELETE = "http://chippip.000webhostapp.com/php/basic/grindingdelete.php";
+    public static final String CNCTOTALPRODUCTIONDELETE = "http://chippip.000webhostapp.com/php/basic/cncproductiondelete.php";
+    public static final String CNCPEROSNWISEPRODUCTIONDELETE = "http://chippip.000webhostapp.com/php/basic/cncworkerdelete.php";
+    public static final String CASINGTOTALPRODUCTIONDELETE = "http://chippip.000webhostapp.com/php/basic/casingproductiondelete.php";
+    public static final String CASINGPERSONWISEDELETE = "http://chippip.000webhostapp.com/php/basic/casingworkerdelete.php";
 
     /**
      * pref

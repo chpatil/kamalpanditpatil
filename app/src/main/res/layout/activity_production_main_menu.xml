@@ -22,28 +22,67 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/productionmenu" />
 
-    <Button
-        android:id="@+id/deleteTotalProductionButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="CLICK THIS TO DELETE THE LAST ENTRY OF TOTAL PRODUCTION"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProductionMainMenuToolbar" />
+        app:layout_constraintTop_toTopOf="@+id/ProductionMainMenuToolbar">
 
-    <Button
-        android:id="@+id/deleteattendanceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="CLICK THIS TO DELETE THE LAST ENTRY OF TOTAL PRODUCTION"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProductionMainMenuToolbar" />
+        <Button
+            android:id="@+id/deleteGrindingTotalProductionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="8dp"
+            android:text="DELETE LAST ENTRY OF GRINDING TOTAL PRODUCTION" />
+
+        <Button
+            android:id="@+id/deleteTotalProductionCNCproductionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="DELETE LAST ENTRY OF TOTAL CNC PRODUCTION" />
+
+        <Button
+            android:id="@+id/deletePersonwiseCNCproductionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="DELETE LAST ENTRY OF PEROSNWISE CNC PRODUCTION" />
+
+        <Button
+            android:id="@+id/deleteTotalCasingproductionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="DELETE LAST ENTRY OF TOTAL CASING PRODUCTION" />
+
+        <Button
+            android:id="@+id/deletePersonwiseCasingproductionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="DELETE LAST ENTRY OF PEROSNWISE CASING PRODUCTION" />
+
+        <TextView
+            android:id="@+id/DeleteTextviewcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

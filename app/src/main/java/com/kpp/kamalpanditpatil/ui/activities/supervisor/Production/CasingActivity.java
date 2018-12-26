@@ -24,7 +24,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
-import com.kpp.kamalpanditpatil.ui.activities.supervisor.Base.MenuActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -168,7 +167,7 @@ public class CasingActivity extends AppCompatActivity {
                                                 builder.setTitle("submision Error ....");
                                                 dispalyAlert(message);
                                             } else if (code.equals("1")) {
-                                                startActivity(new Intent(CasingActivity.this,MenuActivity.class));
+                                                startActivity(new Intent(CasingActivity.this, ProductionMainMenu.class));
                                                 finish();
                                             }
                                         } catch (JSONException e) {
