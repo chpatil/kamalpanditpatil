@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="25dp"
+    android:paddingTop="25dp"
+    android:paddingRight="25dp"
+    android:paddingBottom="25dp">
+
+
+    <TextView
+        android:id="@+id/shift"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:text="SHIFT"
+        app:layout_constraintBottom_toTopOf="@+id/shiftSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/shiftSpinner" />
+
+    <Spinner
+        android:id="@+id/shiftSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignTop="@+id/shift"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/pieceordailyspinner"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/pieceordaily"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_alignTop="@+id/pieceordailyspinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="PIECE RATE OR DAILY WAGES"
+        app:layout_constraintBottom_toTopOf="@+id/pieceordailyspinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pieceordailyspinner" />
+
+    <Spinner
+        android:id="@+id/pieceordailyspinner"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/overtimeSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/overtime"
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:layout_alignTop="@+id/overtimeSpinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="OVERTIME"
+        app:layout_constraintBottom_toTopOf="@+id/overtimeSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/overtimeSpinner" />
+
+    <Spinner
+        android:id="@+id/overtimeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/otShiftspinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/otShift"
+        android:layout_width="match_parent"
+        android:layout_height="17dp"
+        android:layout_alignTop="@+id/otShiftspinner"
+        android:layout_centerHorizontal="true"
+        android:text="OVERTIME SHIFT"
+        app:layout_constraintBottom_toTopOf="@+id/otShiftspinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/otShiftspinner" />
+
+    <Spinner
+        android:id="@+id/otShiftspinner"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/attendanceSubmitbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/attendanceSubmitbutton"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="SUBMIT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</LinearLayout>

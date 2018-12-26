@@ -3,21 +3,21 @@
 
     <item
         android:id="@+id/navigation_admin_editing"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_portrait_black_24dp"
         android:title="@string/EDITING" />
 
     <item
         android:id="@+id/navigation_admin_production"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_trending_up_black_24dp"
         android:title="@string/PRODUCTION" />
 
     <item
         android:id="@+id/navigation__admin_attendance"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_group_black_24dp"
         android:title="@string/ATTENDANCE" />
     <item
         android:id="@+id/navigation_economics"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_monetization_on_black_24dp"
         android:title="@string/ECONOMICS"/>
 
 </menu>

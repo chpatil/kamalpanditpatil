@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -22,19 +23,19 @@ public class AttendanceBaseActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.attendance_navigation_casing:
-                    startActivity(new Intent(AttendanceBaseActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.CasingActivity.class));
+                    startActivity(new Intent(AttendanceBaseActivity.this, AttendanceCasingActivity.class));
                     finish();
                     return true;
                 case R.id.attendance_navigation_cnc:
-                    startActivity(new Intent(AttendanceBaseActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.CNCActivity.class));
+                    startActivity(new Intent(AttendanceBaseActivity.this, AttendanceCNCActivity.class));
                     finish();
                     return true;
                 case R.id.attendance_navigation_grinding:
-                    startActivity(new Intent(AttendanceBaseActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.GrindingActivity.class));
+                    startActivity(new Intent(AttendanceBaseActivity.this, AttendanceGrindingActivity.class));
                     finish();
                     return true;
                 case R.id.attendance_navigation_qanda:
-                    startActivity(new Intent(AttendanceBaseActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.QandAActivity.class));
+                    startActivity(new Intent(AttendanceBaseActivity.this, AttendanceQandAActivity.class));
                     finish();
                     return true;
             }
@@ -46,10 +47,18 @@ public class AttendanceBaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_base);
+        Toolbar toolbar = findViewById(R.id.attendancetoolbar);
+        toolbar.setTitle("ATTENDANCE");
+        setSupportActionBar(toolbar);
 
         mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Base.MenuActivity.class));
+        finish();
+    }
 }

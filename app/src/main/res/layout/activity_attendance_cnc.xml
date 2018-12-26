@@ -5,13 +5,14 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/attendancecasingworkerListToolbar"
+        android:id="@+id/attendanceCNCworkerListToolbar"
         layout="@layout/toolbar" />
 
     <Button
-        android:id="@+id/AttendanceCasingdateButton"
+        android:id="@+id/AttendanceCNCdateButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
     <!-- Editext for Search -->
 

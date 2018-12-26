@@ -185,6 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
                             builder.setTitle("Server Response ...");
                             if (code.equals("1")){
                                 displayAlert("registration success");
+
                             }else if(code.equals("0")){
                                 displayAlert("registration failure");
                             }

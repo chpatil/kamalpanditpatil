@@ -52,7 +52,10 @@
         <activity
             android:name=".ui.activities.supervisor.Attendance.AttendanceBaseActivity"
             android:label="@string/title_activity_attendance_base" />
-        <activity android:name=".ui.activities.supervisor.Attendance.AttendanceCasingActivity"></activity>
+        <activity android:name=".ui.activities.supervisor.Attendance.AttendanceCasingActivity" />
+        <activity android:name=".ui.activities.supervisor.Attendance.AttendanceCNCActivity" />
+        <activity android:name=".ui.activities.supervisor.Attendance.AttendanceQandAActivity" />
+        <activity android:name=".ui.activities.supervisor.Attendance.AttendanceGrindingActivity"></activity>
     </application>
 
 </manifest>

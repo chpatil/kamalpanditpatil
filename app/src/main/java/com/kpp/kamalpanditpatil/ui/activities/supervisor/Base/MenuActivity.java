@@ -24,15 +24,14 @@ public class MenuActivity extends AppCompatActivity {
                 case R.id.navigation_registration:
                     startActivity(new Intent(MenuActivity.this,RegisterActivity.class));
                     finish();
-                    mTextMessage.setText(R.string.REGISTRATION);
                     return true;
                 case R.id.navigation_attendance:
-                    mTextMessage.setText(R.string.ATTENDANCE);
+                    startActivity(new Intent(MenuActivity.this, com.kpp.kamalpanditpatil.ui.activities.supervisor.Attendance.AttendanceBaseActivity.class));
+                    finish();
                     return true;
                 case R.id.navigation_production:
                     startActivity(new Intent(MenuActivity.this,com.kpp.kamalpanditpatil.ui.activities.supervisor.Production.ProductionMainMenu.class));
                     finish();
-                    mTextMessage.setText(R.string.PRODUCTION);
                     return true;
             }
             return false;
@@ -52,4 +51,9 @@ public class MenuActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, com.kpp.kamalpanditpatil.ui.activities.login_page.class));
+        finish();
+    }
 }
