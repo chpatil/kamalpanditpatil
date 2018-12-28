@@ -25,6 +25,7 @@ public class constants {
     public static final String ATTENDANCEGRINDINGINGWORKERLIST = "https://chippip.hostingerapp.com/php/basic/grindingnames.php ";
     public static final String ATTENDANCEQANDAWORKERLIST = "https://chippip.hostingerapp.com/php/basic/QandAnames.php";
     public static final String QANDAPRODUCTION = "https://chippip.hostingerapp.com/php/basic/Q&Apresentnames.php";
+    public static final String ATTENDACEADMINDATEWISE = "http://chippip.hostingerapp.com/php/basic/attendanceshiftwise.php";
 //    public static final String ATTENDANCEDELETE = "http://chippip.hostingerapp.com/php/basic/deleteattendance.php";
 //    public static final String GRINDINGDELETE = "http://chippip.hostingerapp.com/php/basic/grindingdelete.php";
 //    public static final String CNCTOTALPRODUCTIONDELETE = "http://chippip.hostingerapp.com/php/basic/cncproductiondelete.php";

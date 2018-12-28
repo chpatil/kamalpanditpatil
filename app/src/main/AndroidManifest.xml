@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -55,7 +56,16 @@
         <activity android:name=".ui.activities.supervisor.Attendance.AttendanceCasingActivity" />
         <activity android:name=".ui.activities.supervisor.Attendance.AttendanceCNCActivity" />
         <activity android:name=".ui.activities.supervisor.Attendance.AttendanceQandAActivity" />
-        <activity android:name=".ui.activities.supervisor.Attendance.AttendanceGrindingActivity"></activity>
+        <activity android:name=".ui.activities.supervisor.Attendance.AttendanceGrindingActivity" />
+        <activity android:name=".ui.activities.utilities.GrindingGraphview" />
+        <activity
+            android:name=".ui.activities.admin.Attendance.AdminAttendanceBaseActivity"
+            android:label="@string/title_activity_admin_attendance_base" />
+        <activity android:name=".ui.activities.admin.Attendance.AdminAttendanceCasingActivity" />
+        <activity android:name=".ui.activities.admin.Attendance.AdminAttendanceCNCActivity" />
+        <activity android:name=".ui.activities.admin.Attendance.AdminAttendanceGrindingActivity" />
+        <activity android:name=".ui.activities.admin.Attendance.AdminAttendanceQandAActivity" />
+        <activity android:name=".ui.activities.utilities.AttendanceDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
 import com.kpp.kamalpanditpatil.models.worker_model;
+import com.kpp.kamalpanditpatil.ui.activities.utilities.LstViewAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,13 +30,12 @@ import java.util.Map;
 public class WorkerDetailsDisplay extends AppCompatActivity {
     private ListView lv1;
     private Button EditButton;
-    ArrayAdapter<String> adapter;
     ArrayList<String> workerDataList;
     ArrayList<String>workerDataTransferList;
     String value;
     worker_model worker;
     ProgressDialog pDiaalog;
-
+    LstViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +47,17 @@ public class WorkerDetailsDisplay extends AppCompatActivity {
         EditButton=findViewById(R.id.EditButton);
         workerDataList=new ArrayList<String>();
         workerDataTransferList=new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, workerDataList);
         pDiaalog = new ProgressDialog(this);
         pDiaalog.setMessage("Fetching data ...");
         pDiaalog.show();
+        workerDataList.clear();
+        workerDataTransferList.clear();
+        ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_admin_details_layout, lv1, false);
+        // Add header view to the ListView
+        lv1.addHeaderView(headerView);
+        // Get the string array defined in strings.xml file
+        // Create an adapter to bind data to the ListView
+        // Bind data to the ListView
         StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.WORKERDATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -85,17 +92,18 @@ public class WorkerDetailsDisplay extends AppCompatActivity {
                     workerDataTransferList.add(String.valueOf(worker.getId_no()));
 
                     // adding worker to worker array
-                    workerDataList.add(constants.workerDisplayarray[0]+"\t"+worker.getName());
-                    workerDataList.add(constants.workerDisplayarray[1]+"\t"+worker.getGender());
-                    workerDataList.add(constants.workerDisplayarray[2]+"\t"+worker.getAddress());
-                    workerDataList.add(constants.workerDisplayarray[3]+"\t"+worker.getId_no());
-                    workerDataList.add(constants.workerDisplayarray[4]+"\t"+worker.getDepartment());
-                    workerDataList.add(constants.workerDisplayarray[5]+"\t"+worker.getAadhar());
-                    workerDataList.add(constants.workerDisplayarray[6]+"\t"+worker.getBankname());
-                    workerDataList.add(constants.workerDisplayarray[7]+"\t"+worker.getIFSC_code());
-                    workerDataList.add(constants.workerDisplayarray[8]+"\t"+worker.getAccountno());
-                    workerDataList.add(constants.workerDisplayarray[9]+"\t"+worker.getPF());
-                    workerDataList.add(constants.workerDisplayarray[10]+"\t"+worker.getESIC());
+                    workerDataList.add(constants.workerDisplayarray[0] + "__" + worker.getName());
+                    workerDataList.add(constants.workerDisplayarray[1] + "__" + worker.getGender());
+                    workerDataList.add(constants.workerDisplayarray[2] + "__" + worker.getAddress());
+                    workerDataList.add(constants.workerDisplayarray[3] + "__" + worker.getId_no());
+                    workerDataList.add(constants.workerDisplayarray[4] + "__" + worker.getDepartment());
+                    workerDataList.add(constants.workerDisplayarray[5] + "__" + worker.getAadhar());
+                    workerDataList.add(constants.workerDisplayarray[6] + "__" + worker.getBankname());
+                    workerDataList.add(constants.workerDisplayarray[7] + "__" + worker.getIFSC_code());
+                    workerDataList.add(constants.workerDisplayarray[8] + "__" + worker.getAccountno());
+                    workerDataList.add(constants.workerDisplayarray[9] + "__" + worker.getPF());
+                    workerDataList.add(constants.workerDisplayarray[10] + "__" + worker.getESIC());
+                    adapter = new LstViewAdapter(WorkerDetailsDisplay.this, R.layout.rowlayout_admin_data, R.id.attributes, workerDataList);
                     lv1.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     pDiaalog.dismiss();

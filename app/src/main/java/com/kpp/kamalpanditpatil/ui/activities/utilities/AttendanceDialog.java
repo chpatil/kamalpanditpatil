@@ -50,9 +50,9 @@ public class AttendanceDialog extends Dialog {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle("ATTENDANCE DETAILS");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.attendance_dialog);
+        setTitle("ATTENDANCE DETAILS");
         overtime = findViewById(R.id.overtimeSpinner);
         otshift = findViewById(R.id.otShiftspinner);
         shift = findViewById(R.id.shiftSpinner);
