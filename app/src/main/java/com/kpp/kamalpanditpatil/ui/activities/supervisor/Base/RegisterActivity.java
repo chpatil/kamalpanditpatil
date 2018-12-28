@@ -63,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
     String gender,department,IFSC_code,bankname,address,aadhar,name,accountno,esic,pf;
     int id_no;
     AlertDialog.Builder builder;
+    ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
         Toolbar toolbar=findViewById(R.id.registerToolbar);
         toolbar.setTitle("REGISTERATION");
         setSupportActionBar(toolbar);
-
+        pDialog = new ProgressDialog(this);
 
 
         //spinner Department Defination
@@ -141,19 +142,14 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
 //        _signupButton.setEnabled(false);
-
-                final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this,
-                        R.style.AppTheme);
-                progressDialog.setIndeterminate(true);
-                progressDialog.setMessage("Creating Worker...");
-                progressDialog.show();
+                pDialog.setIndeterminate(true);
+                pDialog.setMessage("Creating Worker...");
+                pDialog.show();
 
                 // TODO: Implement your own signup logic here.
                 serverSignup();
 
-                progressDialog.dismiss();
-                Toast.makeText(RegisterActivity.this, "registration success", Toast.LENGTH_LONG).show();
-
+                pDialog.dismiss();
             }
 
         });
@@ -184,10 +180,13 @@ public class RegisterActivity extends AppCompatActivity {
                             String message =jsonObject.getString("message");
                             builder.setTitle("Server Response ...");
                             if (code.equals("1")){
-                                displayAlert("registration success");
+                                Toast.makeText(RegisterActivity.this, "Registration Successfull", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
+                                pDialog.dismiss();
 
                             }else if(code.equals("0")){
-                                displayAlert("registration failure");
+                                pDialog.dismiss();
+                                Toast.makeText(RegisterActivity.this, "Registration unsuccessfull", Toast.LENGTH_SHORT).show();
                             }
                             builder.setMessage(message);
 

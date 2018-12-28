@@ -1,5 +1,6 @@
 package com.kpp.kamalpanditpatil.ui.activities.admin.Base;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class WorkerDetailsDisplay extends AppCompatActivity {
     ArrayList<String>workerDataTransferList;
     String value;
     worker_model worker;
+    ProgressDialog pDiaalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class WorkerDetailsDisplay extends AppCompatActivity {
         workerDataList=new ArrayList<String>();
         workerDataTransferList=new ArrayList<String>();
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, workerDataList);
+        pDiaalog = new ProgressDialog(this);
+        pDiaalog.setMessage("Fetching data ...");
+        pDiaalog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.WORKERDATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -93,6 +98,7 @@ public class WorkerDetailsDisplay extends AppCompatActivity {
                     workerDataList.add(constants.workerDisplayarray[10]+"\t"+worker.getESIC());
                     lv1.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+                    pDiaalog.dismiss();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

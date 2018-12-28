@@ -3,6 +3,7 @@ package com.kpp.kamalpanditpatil.ui.activities.supervisor.Production;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class CasingActivity extends AppCompatActivity {
     int day, month, dyear;
     static final int Dialog_id=0;
     String value,code,message;
+    ProgressDialog pDialog;
     android.support.v7.app.AlertDialog.Builder builder;
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int selectedYear,
@@ -75,6 +77,7 @@ public class CasingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_casing);
         ButterKnife.bind(this);
+        pDialog = new ProgressDialog(this);
         Toolbar toolbar=findViewById(R.id.casingtoolbar);
         toolbar.setTitle("CASING");
         setSupportActionBar(toolbar);
@@ -154,6 +157,8 @@ public class CasingActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
+                                pDialog.setMessage("Loading...");
+                                pDialog.show();
                                 StringRequest stringRequest=new StringRequest(Request.Method.POST, constants.CASINGURL, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -164,9 +169,11 @@ public class CasingActivity extends AppCompatActivity {
                                             code=jsonObject.getString("code");
                                             message=jsonObject.getString("message");
                                             if(code.equals("0")){
-                                                builder.setTitle("submision Error ....");
-                                                dispalyAlert(message);
+                                                pDialog.dismiss();
+                                                Toast.makeText(CasingActivity.this, "Submission error" + message, Toast.LENGTH_SHORT).show();
                                             } else if (code.equals("1")) {
+                                                pDialog.dismiss();
+                                                Toast.makeText(CasingActivity.this, "Submission done:" + message, Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(CasingActivity.this, ProductionMainMenu.class));
                                                 finish();
                                             }
@@ -201,7 +208,6 @@ public class CasingActivity extends AppCompatActivity {
                                 };
                                 com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(CasingActivity.this).addtoRequestQueue(stringRequest);
 
-                                Toast.makeText(getApplicationContext(),"PRODUCTION IS SUBMITTED",Toast.LENGTH_LONG).show();
                             }
                         });
         builder.show();
@@ -212,5 +218,11 @@ public class CasingActivity extends AppCompatActivity {
         startActivity(new Intent(this, ProductionMainMenu.class));
         finish();
     }
-}
 
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
+    }
+}

@@ -26,7 +26,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
 import com.kpp.kamalpanditpatil.models.worker_model;
-import com.kpp.kamalpanditpatil.ui.activities.supervisor.Attendance.AttendanceBaseActivity;
 import com.kpp.kamalpanditpatil.ui.activities.utilities.AttendanceDialog;
 
 import org.json.JSONArray;
@@ -227,7 +226,7 @@ public class QandAActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, AttendanceBaseActivity.class));
+        startActivity(new Intent(this, ProductionMainMenu.class));
         finish();
     }
 

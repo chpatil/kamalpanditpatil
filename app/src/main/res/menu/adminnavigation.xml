@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_admin_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="HOME" />
+    <item
         android:id="@+id/navigation_admin_editing"
         android:icon="@drawable/ic_portrait_black_24dp"
         android:title="@string/EDITING" />

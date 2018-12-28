@@ -3,47 +3,33 @@ package com.kpp.kamalpanditpatil.ui.activities.admin.Base;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
-import com.kpp.kamalpanditpatil.models.worker_model;
-import com.kpp.kamalpanditpatil.ui.activities.login_page;
-import com.kpp.kamalpanditpatil.ui.activities.supervisor.Base.MenuActivity;
-import com.kpp.kamalpanditpatil.ui.activities.utilities.workerDataDialog;
-
 import com.android.volley.Response;
-
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
+import com.kpp.kamalpanditpatil.models.worker_model;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class worker_list extends AppCompatActivity {
     // List view
@@ -74,8 +60,8 @@ public class worker_list extends AppCompatActivity {
         setSupportActionBar(toolbar);
         workerlist=new ArrayList<String>();
 
-        lv = (ListView) findViewById(R.id.list_view);
-        inputSearch = (EditText) findViewById(R.id.inputsearch);
+        lv = findViewById(R.id.list_view);
+        inputSearch = findViewById(R.id.inputsearch);
 
         // Adding items to listview
         pDialog = new ProgressDialog(this);

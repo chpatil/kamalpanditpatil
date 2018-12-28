@@ -128,8 +128,8 @@ public class AttendanceQandAActivity extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
                     code = jsonObject.getString("code");
                     if (code.equals("0")) {
-                        builder.setTitle("0");
-                        dispalyAlert(jsonObject.getString("message"));
+                        Toast.makeText(AttendanceQandAActivity.this, "Attendance not submitted", Toast.LENGTH_SHORT).show();
+                        pDialog.dismiss();
                     } else if (code.equals("1")) {
 //
                         lv.setAdapter(adapter);
@@ -202,7 +202,7 @@ public class AttendanceQandAActivity extends AppCompatActivity {
                         MODE_PRIVATE);
                 SharedPreferences.Editor prefEditor = settings.edit();
                 prefEditor.putString("name", value);
-                prefEditor.putString("deaprtment", department);
+                prefEditor.putString("department", "QandA");
                 prefEditor.putString("databaseDate", DatabaseDate);
                 prefEditor.commit();
                 attendanceDialog = new AttendanceDialog(AttendanceQandAActivity.this);

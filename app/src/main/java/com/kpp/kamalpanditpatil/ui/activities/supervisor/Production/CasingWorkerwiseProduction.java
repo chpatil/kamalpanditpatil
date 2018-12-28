@@ -3,6 +3,7 @@ package com.kpp.kamalpanditpatil.ui.activities.supervisor.Production;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class CasingWorkerwiseProduction extends AppCompatActivity {
     int day, month, dyear;
     String value, name, code, message;
     android.support.v7.app.AlertDialog.Builder builder;
+    ProgressDialog pDialog;
     private EditText editTextProduction;
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int selectedYear,
@@ -74,6 +76,7 @@ public class CasingWorkerwiseProduction extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.casingWorkerProductiontoolbar);
         name = getIntent().getStringExtra("value");
         toolbar.setTitle(name);
+        pDialog = new ProgressDialog(this);
         setSupportActionBar(toolbar);
         final Calendar cal = Calendar.getInstance();
         year_x = cal.get(Calendar.YEAR);
@@ -124,6 +127,8 @@ public class CasingWorkerwiseProduction extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
+                                pDialog.setMessage("Loading...");
+                                pDialog.show();
                                 StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.CASINGWORKERWISEPRODUCTION, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -134,9 +139,10 @@ public class CasingWorkerwiseProduction extends AppCompatActivity {
                                             code = jsonObject.getString("code");
                                             message = jsonObject.getString("message");
                                             if (code.equals("0")) {
-                                                builder.setTitle("submision Error ....");
-                                                dispalyAlert(message);
+                                                pDialog.dismiss();
+                                                Toast.makeText(CasingWorkerwiseProduction.this, "Submission error", Toast.LENGTH_SHORT).show();
                                             } else if (code.equals("1")) {
+                                                pDialog.dismiss();
                                                 Toast.makeText(CasingWorkerwiseProduction.this, "submitted successfully", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(CasingWorkerwiseProduction.this, CasingWorkerList.class));
                                                 finish();
@@ -167,8 +173,6 @@ public class CasingWorkerwiseProduction extends AppCompatActivity {
                                     }
                                 };
                                 com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(CasingWorkerwiseProduction.this).addtoRequestQueue(stringRequest);
-
-                                Toast.makeText(getApplicationContext(), "PRODUCTION IS SUBMITTED", Toast.LENGTH_LONG).show();
                             }
                         });
         builder.show();

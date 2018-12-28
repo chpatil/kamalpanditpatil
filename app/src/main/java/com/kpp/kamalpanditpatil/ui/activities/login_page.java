@@ -1,5 +1,6 @@
 package com.kpp.kamalpanditpatil.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -43,6 +44,7 @@ public class login_page extends AppCompatActivity {
     Spinner _spinnerLogin;
     String userrole,user,pass,code;
     AlertDialog.Builder builder;
+    ProgressDialog pDialog;
 
 
     @Override
@@ -50,6 +52,7 @@ public class login_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
         ButterKnife.bind(this);
+        pDialog = new ProgressDialog(this);
 
         //spinner declaration and application
         _spinnerLogin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -73,8 +76,10 @@ public class login_page extends AppCompatActivity {
         _loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user=_userText.getText().toString();
-                pass=_passwordText.getText().toString();
+                pDialog.setMessage("Loading...");
+                pDialog.show();
+                user = _userText.getText().toString().trim();
+                pass = _passwordText.getText().toString().trim();
                 if(user.equals("")||pass.equals("")){
                     Toast.makeText(login_page.this, "kogin page credentials cannot be empty", Toast.LENGTH_SHORT).show();
                 }else{
@@ -87,11 +92,14 @@ public class login_page extends AppCompatActivity {
                                 JSONObject jsonObject=jsonArray.getJSONObject(0);
                                 code=jsonObject.getString("code");
                                 if(code.equals("login_failed")){
+                                    pDialog.dismiss();
                                     Toast.makeText(login_page.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 }else if(userrole.equals("ADMIN")&&code.equals("login_success")){
+                                    pDialog.dismiss();
                                     startActivity(new Intent(login_page.this,AdminMainMenu.class));
                                     finish();
                                 } else if (userrole.equals("SUPERVISOR")&&code.equals("login_success")) {
+                                    pDialog.dismiss();
                                     startActivity(new Intent(login_page.this,MenuActivity.class));
                                     finish();
                                 }

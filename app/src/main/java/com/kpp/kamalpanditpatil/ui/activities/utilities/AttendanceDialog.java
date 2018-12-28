@@ -2,6 +2,7 @@ package com.kpp.kamalpanditpatil.ui.activities.utilities;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class AttendanceDialog extends Dialog {
     String departmentname, name, databaseDate, code, message;
     Spinner overtime, otshift, shift, pieceordaily;
     Button AttendanceSubmitButton;
+    ProgressDialog pDialog;
 
     public AttendanceDialog(Context context) {
         super(context);
@@ -42,7 +44,7 @@ public class AttendanceDialog extends Dialog {
                 .getSharedPreferences("NAMEDEPARTMENTDATE", Context.MODE_PRIVATE);
 
         name = prefs.getString("name", "");
-        departmentname = prefs.getString("deaprtment", "");
+        departmentname = prefs.getString("department", "");
         databaseDate = prefs.getString("databaseDate", "");
     }
 
@@ -83,11 +85,15 @@ public class AttendanceDialog extends Dialog {
         adapter_role
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         overtime.setAdapter(adapter_role);
+        pDialog = new ProgressDialog(getContext());
 
 
         AttendanceSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pDialog.setMessage("Loading...");
+                pDialog.show();
+
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.ATTENDANCEINSERT, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -98,8 +104,10 @@ public class AttendanceDialog extends Dialog {
                             code = jsonObject.getString("code");
                             message = jsonObject.getString("message");
                             if (code.equals("0")) {
+                                pDialog.dismiss();
                                 Toast.makeText(getContext(), "Attendance not submitted", Toast.LENGTH_SHORT).show();
                             } else if (code.equals("1")) {
+                                pDialog.dismiss();
                                 Toast.makeText(getContext(), "Attendance Submitted", Toast.LENGTH_SHORT).show();
                                 dismiss();
                             }
@@ -140,5 +148,12 @@ public class AttendanceDialog extends Dialog {
             }
         });
 
+    }
+
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
     }
 }

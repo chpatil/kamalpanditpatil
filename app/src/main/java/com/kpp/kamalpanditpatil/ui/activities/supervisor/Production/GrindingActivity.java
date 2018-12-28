@@ -2,7 +2,7 @@ package com.kpp.kamalpanditpatil.ui.activities.supervisor.Production;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -22,7 +22,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
-import com.kpp.kamalpanditpatil.ui.activities.supervisor.Base.MenuActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +51,7 @@ public class GrindingActivity extends AppCompatActivity {
     String code,message;
     android.support.v7.app.AlertDialog.Builder builder;
     String GrindingProduction;
+    ProgressDialog pDialog;
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int selectedYear,
                               int selectedMonth, int selectedDay) {
@@ -76,6 +76,7 @@ public class GrindingActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(this);
         setContentView(R.layout.activity_grinding);
         ButterKnife.bind(this);
+        pDialog = new ProgressDialog(this);
         Toolbar toolbar=findViewById(R.id.grindingToolbar);
         toolbar.setTitle("GRINDING");
         setSupportActionBar(toolbar);
@@ -99,6 +100,8 @@ public class GrindingActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(GrindingProduction)) {
                     Grindingproduction.setError("It cannot be empty");
                 } else {
+                    pDialog.setMessage("submitting data");
+                    pDialog.show();
                     StringRequest stringRequest=new StringRequest(Request.Method.POST, constants.GRINDINGURL, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -109,10 +112,10 @@ public class GrindingActivity extends AppCompatActivity {
                                 code=jsonObject.getString("code");
                                 message=jsonObject.getString("message");
                                 if(code.equals("0")){
-                                    builder.setTitle("submision Error ....");
-                                    dispalyAlert(message);
-                                    update();
+                                    pDialog.dismiss();
+                                    Toast.makeText(GrindingActivity.this, message, Toast.LENGTH_SHORT).show();
                                 } else if (code.equals("1")) {
+                                    pDialog.dismiss();
                                     Toast.makeText(GrindingActivity.this, "submitted successfully", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(GrindingActivity.this, ProductionMainMenu.class));
                                     finish();
@@ -127,8 +130,7 @@ public class GrindingActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            dispalyAlert(error.getMessage());
-                            update();
+                            Toast.makeText(GrindingActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                         }
 
 
@@ -168,67 +170,9 @@ public class GrindingActivity extends AppCompatActivity {
         return new DatePickerDialog(this, datePickerListener, dyear, month, day);
     }
 
-    private void update(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, constants.GRINDINGUPDATEURL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    JSONObject jsonObject=jsonArray.getJSONObject(0);
-                    code=jsonObject.getString("code");
-                    message=jsonObject.getString("message");
-                    if(code.equals("0")){
-                        builder.setTitle("submision Error ....");
-                        dispalyAlert(message);
-                    } else if (code.equals("1")) {
-                        startActivity(new Intent(GrindingActivity.this, ProductionMainMenu.class));
-                        finish();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                dispalyAlert(error.getMessage());
-            }
-
-
-
-        }){
-            @Override
-            protected Map<String, String> getParams() {
-                GrindingProduction = GrindingproductionTextview.getText().toString();
-                Map<String,String> datamap=new HashMap<String,String>();
-                datamap.put("production", GrindingProduction);
-                datamap.put("date",Date);
-                return datamap;
-            }
-        };
-        com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(GrindingActivity.this).addtoRequestQueue(stringRequest);
-
-        startActivity(new Intent(GrindingActivity.this,MenuActivity.class));
-    }
-    private  void dispalyAlert(String Message){
-        builder.setMessage(Message);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        android.support.v7.app.AlertDialog alertDialog=builder.create();
-        alertDialog.show();
-    }
-
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, ProductionMainMenu.class));
         finish();
     }
-    }
+}

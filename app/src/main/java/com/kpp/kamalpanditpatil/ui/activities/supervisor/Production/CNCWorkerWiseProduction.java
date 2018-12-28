@@ -3,6 +3,7 @@ package com.kpp.kamalpanditpatil.ui.activities.supervisor.Production;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class CNCWorkerWiseProduction extends AppCompatActivity {
     int day, month, dyear;
     String value, name, code, message;
     android.support.v7.app.AlertDialog.Builder builder;
+    ProgressDialog pDialog;
     private EditText editTextProduction;
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         public void onDateSet(DatePicker view, int selectedYear,
@@ -71,6 +73,7 @@ public class CNCWorkerWiseProduction extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cncworker_wise_production);
         ButterKnife.bind(this);
+        pDialog = new ProgressDialog(this);
         Toolbar toolbar = findViewById(R.id.casingWorkerProductiontoolbar);
         name = getIntent().getStringExtra("value");
         toolbar.setTitle(name);
@@ -119,11 +122,13 @@ public class CNCWorkerWiseProduction extends AppCompatActivity {
         View view = inflater.inflate(R.layout.cnc_casing_input_dialog, null);
         editTextProduction = view.findViewById(R.id.productionTypeEditTExt);
         builder.setView(view)
-                .setTitle("CASING PRODUCTION").
+                .setTitle("CNC PRODUCTION").
                 setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
+                                pDialog.setMessage("submitting data...");
+                                pDialog.show();
                                 StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.CNCWORKERWISEPRODUCTION, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -134,9 +139,10 @@ public class CNCWorkerWiseProduction extends AppCompatActivity {
                                             code = jsonObject.getString("code");
                                             message = jsonObject.getString("message");
                                             if (code.equals("0")) {
-                                                builder.setTitle("submision Error ....");
-                                                dispalyAlert(message);
+                                                pDialog.dismiss();
+                                                Toast.makeText(CNCWorkerWiseProduction.this, "error in submitting production", Toast.LENGTH_SHORT).show();
                                             } else if (code.equals("1")) {
+                                                pDialog.dismiss();
                                                 Toast.makeText(CNCWorkerWiseProduction.this, "submitted successfully", Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(CNCWorkerWiseProduction.this, CNCWorkerList.class));
                                                 finish();
@@ -167,8 +173,6 @@ public class CNCWorkerWiseProduction extends AppCompatActivity {
                                     }
                                 };
                                 com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(CNCWorkerWiseProduction.this).addtoRequestQueue(stringRequest);
-
-                                Toast.makeText(getApplicationContext(), "PRODUCTION IS SUBMITTED", Toast.LENGTH_LONG).show();
                             }
                         });
         builder.show();

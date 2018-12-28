@@ -19,33 +19,33 @@
     <string name="CNC">CNC</string>
     <string name="Q_AND_A">Q AND A</string>
     <string-array name="Casing">
-        <item>4 and half inch</item>
-        <item>4 inch</item>
-        <item>5 inch</item>
-        <item>6 inch</item>
-        <item>7 inch</item>
-        <item>8 inch</item>
-        <item>9 inch</item>
-        <item>10 inch</item>
-        <item>12 inch</item>
+        <item>4_half_inch</item>
+        <item>4_inch</item>
+        <item>5_inch</item>
+        <item>6_inch</item>
+        <item>7_inch</item>
+        <item>8_inch</item>
+        <item>9_inch</item>
+        <item>10_inch</item>
+        <item>12_inch</item>
     </string-array>
     <string-array name="CNC">
-        <item>1 inch coupler</item>
-        <item>1 1:4 inch coupler</item>
-        <item>1 1:2 inch coupler</item>
-        <item>2 inch coupler</item>
-        <item>2 1:2 inch coupler</item>
-        <item>3 inch coupler</item>
-        <item>4 inch coupler</item>
-        <item>4 inch coupler sample</item>
-        <item>1 inch pipe</item>
-        <item>1 1:4 inch pipe</item>
-        <item>1 1:2 inch pipe</item>
-        <item>2 inch pipe</item>
-        <item>2 1:2 inch pipe</item>
-        <item>3 inch pipe</item>
-        <item>4 inch pipe</item>
-        <item>4 inch pipe sample</item>
+        <item>1_inch_coupler</item>
+        <item>1_quarter_inch_coupler</item>
+        <item>1_half_inch_coupler</item>
+        <item>2_inch_coupler</item>
+        <item>2_half_inch_coupler</item>
+        <item>3_inch_coupler</item>
+        <item>4_inch_coupler</item>
+        <item>4_inch_coupler sample</item>
+        <item>1_inch_pipe</item>
+        <item>1_quarter_inch_pipe</item>
+        <item>1_half_inch_pipe</item>
+        <item>2 inch_pipe</item>
+        <item>2_half_inch_pipe</item>
+        <item>3_inch_pipe</item>
+        <item>4_inch_pipe</item>
+        <item>4_inch_pipe sample</item>
     </string-array>
 
     <string name="submit">SUBMIT</string>

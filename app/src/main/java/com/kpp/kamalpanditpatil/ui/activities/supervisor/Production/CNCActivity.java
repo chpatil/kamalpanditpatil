@@ -3,6 +3,7 @@ package com.kpp.kamalpanditpatil.ui.activities.supervisor.Production;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ public class CNCActivity extends AppCompatActivity {
     Button PersonWiseProduction;
     String DatabaseDate, departmentname;
     String Date, Day;
+    ProgressDialog pDialog;
     int year_x, month_x, day_x;
     int day, month, dyear;
     String value, code, message;
@@ -78,6 +80,7 @@ public class CNCActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Toolbar toolbar=findViewById(R.id.CNCtoolbar);
         toolbar.setTitle("C.N.C");
+        pDialog = new ProgressDialog(this);
         setSupportActionBar(toolbar);
         final Calendar cal = Calendar.getInstance();
         year_x = cal.get(Calendar.YEAR);
@@ -137,6 +140,8 @@ public class CNCActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
+                                pDialog.setMessage("Submitting data");
+                                pDialog.show();
                                 StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.CNCURL, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -147,9 +152,11 @@ public class CNCActivity extends AppCompatActivity {
                                             code = jsonObject.getString("code");
                                             message = jsonObject.getString("message");
                                             if (code.equals("0")) {
-                                                builder.setTitle("submision Error ....");
-                                                dispalyAlert(message);
+                                                pDialog.dismiss();
+                                                Toast.makeText(CNCActivity.this, message, Toast.LENGTH_SHORT).show();
                                             } else if (code.equals("1")) {
+                                                pDialog.dismiss();
+                                                Toast.makeText(CNCActivity.this, message, Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(CNCActivity.this, ProductionMainMenu.class));
                                                 finish();
                                             }
