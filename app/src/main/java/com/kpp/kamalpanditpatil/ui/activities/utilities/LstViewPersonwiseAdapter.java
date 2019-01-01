@@ -11,14 +11,13 @@ import com.kpp.kamalpanditpatil.R;
 
 import java.util.ArrayList;
 
-
-public class LstViewDatewiseAdpater extends ArrayAdapter<String> {
+public class LstViewPersonwiseAdapter extends ArrayAdapter<String> {
     int groupid;
     String[] item_list1;
     ArrayList<String> desc;
     Context context;
 
-    public LstViewDatewiseAdpater(Context context, int vg, int id, ArrayList<String> item_list) {
+    public LstViewPersonwiseAdapter(Context context, int vg, int id, ArrayList<String> item_list) {
         super(context, vg, id, item_list);
         this.context = context;
         groupid = vg;
@@ -30,29 +29,28 @@ public class LstViewDatewiseAdpater extends ArrayAdapter<String> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-
         View rowView = convertView;
         // Inflate the rowlayout.xml file if convertView is null
         if (rowView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(groupid, parent, false);
-            LstViewDatewiseAdpater.ViewHolder viewHolder = new LstViewDatewiseAdpater.ViewHolder();
-            viewHolder.textname = rowView.findViewById(R.id.names);
-            viewHolder.textprice = rowView.findViewById(R.id.shift);
-            viewHolder.textpiece = rowView.findViewById(R.id.pieceordailyDatewise);
+            LstViewPersonwiseAdapter.ViewHolder viewHolder = new LstViewPersonwiseAdapter.ViewHolder();
+            viewHolder.date = rowView.findViewById(R.id.personwise_dates);
+            viewHolder.shift = rowView.findViewById(R.id.personwise_shift);
+            viewHolder.dailyorpiece = rowView.findViewById(R.id.personwise_pieceordaily);
             rowView.setTag(viewHolder);
         }
         String[] items = item_list1[position].split("__");
-        LstViewDatewiseAdpater.ViewHolder holder = (LstViewDatewiseAdpater.ViewHolder) rowView.getTag();
-        holder.textname.setText(items[0]);
-        holder.textprice.setText(items[1]);
-        holder.textpiece.setText(items[2]);
+        LstViewPersonwiseAdapter.ViewHolder holder = (LstViewPersonwiseAdapter.ViewHolder) rowView.getTag();
+        holder.date.setText(items[0]);
+        holder.shift.setText(items[1]);
+        holder.dailyorpiece.setText(items[2]);
         return rowView;
     }
 
     static class ViewHolder {
-        public TextView textname;
-        public TextView textprice;
-        public TextView textpiece;
+        public TextView date;
+        public TextView shift;
+        public TextView dailyorpiece;
     }
 }

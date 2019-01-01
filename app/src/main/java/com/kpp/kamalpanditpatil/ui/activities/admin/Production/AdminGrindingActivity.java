@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kpp.kamalpanditpatil.R;
-import com.kpp.kamalpanditpatil.ui.activities.utilities.DaterangeDialog;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,6 @@ public class AdminGrindingActivity extends AppCompatActivity {
     String startdate, enddate;
     ProgressDialog mProgressDialog;
     ArrayList<String> searchArrayList = new ArrayList<>();
-    DaterangeDialog daterangeDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +35,6 @@ public class AdminGrindingActivity extends AppCompatActivity {
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                daterangeDialog = new DaterangeDialog(AdminGrindingActivity.this);
-                daterangeDialog.show();
                 showProgressDialog();
 
             }

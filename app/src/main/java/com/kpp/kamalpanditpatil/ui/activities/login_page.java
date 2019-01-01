@@ -136,6 +136,7 @@ public class login_page extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Disable going back to the MainActivity
-        moveTaskToBack(true);
+        startActivity(new Intent(this, login_page.class));
+        finish();
     }
 }

@@ -25,7 +25,10 @@ public class constants {
     public static final String ATTENDANCEGRINDINGINGWORKERLIST = "https://chippip.hostingerapp.com/php/basic/grindingnames.php ";
     public static final String ATTENDANCEQANDAWORKERLIST = "https://chippip.hostingerapp.com/php/basic/QandAnames.php";
     public static final String QANDAPRODUCTION = "https://chippip.hostingerapp.com/php/basic/Q&Apresentnames.php";
-    public static final String ATTENDACEADMINDATEWISE = "http://chippip.hostingerapp.com/php/basic/attendanceshiftwise.php";
+    public static final String ATTENDANCEADMINDATEWISE = "http://chippip.hostingerapp.com/php/basic/attendanceshiftwise.php";
+    public static final String ATTENDANCEDEPARTMENTWORKERLIST = "http://chippip.hostingerapp.com/php/basic/wornamepresentingiventime.php";
+    public static final String ATTENDANCEADMINPERSONWISE = "http://chippip.hostingerapp.com/php/basic/attendancepersonwise.php";
+    public static final String ATTENDANCEADMINOVERTIMEWISE = "http://chippip.hostingerapp.com/php/basic/attendanceovertime.php";
 //    public static final String ATTENDANCEDELETE = "http://chippip.hostingerapp.com/php/basic/deleteattendance.php";
 //    public static final String GRINDINGDELETE = "http://chippip.hostingerapp.com/php/basic/grindingdelete.php";
 //    public static final String CNCTOTALPRODUCTIONDELETE = "http://chippip.hostingerapp.com/php/basic/cncproductiondelete.php";
@@ -50,7 +53,7 @@ public class constants {
     public static final String[] genderRoleString = new String[]{"MALE", "FEMALE"};
     public static final String[] departmentRoleString = new String[]{"CASING", "CNC", "GRINDING", "QUALITY AND ASSURANCE"};
     public static final String[] presentORabsentString = new String[]{"Present", "Absent"};
-    public static final String[] otshiftString = new String[]{"   ", "1st", "2nd", "3rd", "General"};
+    public static final String[] othoursString = new String[]{" ", "1", "2", "3", "4", "5", "6", "7", "8"};
     public static final String[] shiftString = new String[]{"1st", "2nd", "3rd", "General"};
     public static final String[] piecerateorDailyString = new String[]{"Piece Rate", "Daily wages"};
 

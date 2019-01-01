@@ -11,14 +11,13 @@ import com.kpp.kamalpanditpatil.R;
 
 import java.util.ArrayList;
 
-
-public class LstViewDatewiseAdpater extends ArrayAdapter<String> {
+public class LstViewOvertimewiseAdapter extends ArrayAdapter<String> {
     int groupid;
     String[] item_list1;
     ArrayList<String> desc;
     Context context;
 
-    public LstViewDatewiseAdpater(Context context, int vg, int id, ArrayList<String> item_list) {
+    public LstViewOvertimewiseAdapter(Context context, int vg, int id, ArrayList<String> item_list) {
         super(context, vg, id, item_list);
         this.context = context;
         groupid = vg;
@@ -30,29 +29,31 @@ public class LstViewDatewiseAdpater extends ArrayAdapter<String> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-
         View rowView = convertView;
         // Inflate the rowlayout.xml file if convertView is null
         if (rowView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(groupid, parent, false);
-            LstViewDatewiseAdpater.ViewHolder viewHolder = new LstViewDatewiseAdpater.ViewHolder();
-            viewHolder.textname = rowView.findViewById(R.id.names);
-            viewHolder.textprice = rowView.findViewById(R.id.shift);
-            viewHolder.textpiece = rowView.findViewById(R.id.pieceordailyDatewise);
+            LstViewOvertimewiseAdapter.ViewHolder viewHolder = new LstViewOvertimewiseAdapter.ViewHolder();
+            viewHolder.textdate = rowView.findViewById(R.id.overtime_dates);
+            viewHolder.textname = rowView.findViewById(R.id.overtime_name);
+            viewHolder.textpieceordaily = rowView.findViewById(R.id.overtime_pieceordaily);
+            viewHolder.textotshift = rowView.findViewById(R.id.overtime_overtimeshift);
             rowView.setTag(viewHolder);
         }
         String[] items = item_list1[position].split("__");
-        LstViewDatewiseAdpater.ViewHolder holder = (LstViewDatewiseAdpater.ViewHolder) rowView.getTag();
-        holder.textname.setText(items[0]);
-        holder.textprice.setText(items[1]);
-        holder.textpiece.setText(items[2]);
+        LstViewOvertimewiseAdapter.ViewHolder holder = (LstViewOvertimewiseAdapter.ViewHolder) rowView.getTag();
+        holder.textdate.setText(items[0]);
+        holder.textname.setText(items[1]);
+        holder.textotshift.setText(items[2]);
+        holder.textpieceordaily.setText(items[3]);
         return rowView;
     }
 
     static class ViewHolder {
+        public TextView textdate;
         public TextView textname;
-        public TextView textprice;
-        public TextView textpiece;
+        public TextView textpieceordaily;
+        public TextView textotshift;
     }
 }

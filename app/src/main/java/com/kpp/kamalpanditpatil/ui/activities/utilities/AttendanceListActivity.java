@@ -1,10 +1,7 @@
-package com.kpp.kamalpanditpatil.ui.activities.supervisor.Attendance;
+package com.kpp.kamalpanditpatil.ui.activities.utilities;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,23 +24,24 @@ import com.android.volley.toolbox.StringRequest;
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.constants.constants;
 import com.kpp.kamalpanditpatil.models.worker_model;
-import com.kpp.kamalpanditpatil.ui.activities.utilities.AttendanceDialog;
+import com.kpp.kamalpanditpatil.ui.activities.admin.Attendance.AdminAttendanceBaseActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
-public class AttendanceCasingActivity extends AppCompatActivity {
+public class AttendanceListActivity extends AppCompatActivity {
     static final int Dialog_id = 0;
     public final String TAG = "Attendance.casing.worker_list";
     // Listview Adapter
     ArrayAdapter<String> adapter;
     // Search EditText
     EditText inputSearch;
-    String code, message, name, Day, Date, DatabaseDate;
+    String code, startdate, enddate, departmentname;
     AlertDialog.Builder builder;
     Button dateButton;
     // ArrayList for Listview
@@ -54,52 +51,21 @@ public class AttendanceCasingActivity extends AppCompatActivity {
     int year_x, month_x, day_x;
     int day, month, dyear;
     AttendanceDialog attendanceDialog;
-    String department;
     private ListView lv;
-    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
-        public void onDateSet(DatePicker view, int selectedYear,
-                              int selectedMonth, int selectedDay) {
-            selectedMonth = selectedMonth + 1;
-            if (selectedDay < 10) {
-                Day = "0" + selectedDay;
-
-            } else {
-                Day = String.valueOf(selectedDay);
-            }
-            month_x = selectedMonth;
-            year_x = selectedYear;
-            dateButton.setText(Day + "-" + (selectedMonth) + "-" + selectedYear);
-            DatabaseDate = selectedYear + "-" + (selectedMonth) + "-" + Day;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attendance_casing);
-        Toolbar toolbar = findViewById(R.id.attendancecasingworkerListToolbar);
-        toolbar.setTitle("CASING WORKERS");
+        setContentView(R.layout.activity_attendance_list);
+        Toolbar toolbar = findViewById(R.id.attendanceperosnwiseworkerListToolbar);
+        startdate = getIntent().getStringExtra("from");
+        enddate = getIntent().getStringExtra("to");
+        departmentname = getIntent().getStringExtra("department");
+        toolbar.setTitle(departmentname);
         setSupportActionBar(toolbar);
-        department = "CASING";
         workerlist = new ArrayList<String>();
         dateButton = findViewById(R.id.AttendanceCasingdateButton);
         lv = findViewById(R.id.list_view);
-        final Calendar cal = Calendar.getInstance();
-        year_x = cal.get(Calendar.YEAR);
-        month_x = cal.get(Calendar.MONTH);
-        month_x = month_x + 1;
-        day_x = cal.get(Calendar.DAY_OF_MONTH);
-        if (day_x < 10) {
-            Day = "0" + day_x;
-        } else {
-            Day = String.valueOf(day_x);
-        }
-        Date = Day + "-" + month_x + "-" + year_x;
-        day = cal.get(Calendar.DAY_OF_MONTH);
-        month = cal.get(Calendar.MONTH);
-        dyear = cal.get(Calendar.YEAR);
-        DatabaseDate = year_x + "-" + month_x + "-" + Day;
-        dateButton.setText(Date);
         inputSearch = findViewById(R.id.inputsearch);
 
         // Adding items to listview
@@ -113,7 +79,7 @@ public class AttendanceCasingActivity extends AppCompatActivity {
 
         // Creating volley request obj
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.ATTENDANCECASINGWORKERLIST, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.ATTENDANCEDEPARTMENTWORKERLIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -122,7 +88,7 @@ public class AttendanceCasingActivity extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
                     code = jsonObject.getString("code");
                     if (code.equals("0")) {
-                        Toast.makeText(AttendanceCasingActivity.this, "Attendance not submitted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AttendanceListActivity.this, "Attendance not submitted", Toast.LENGTH_SHORT).show();
                         pDialog.dismiss();
                     } else if (code.equals("1")) {
 //
@@ -156,7 +122,18 @@ public class AttendanceCasingActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
-        });
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> datamap = new HashMap<String, String>();
+
+                datamap.put("startdate", startdate);
+                datamap.put("enddate", enddate);
+                datamap.put("department", departmentname);
+
+                return datamap;
+            }
+        };
         com.kpp.kamalpanditpatil.constants.singleton_Connection.getInstance(this).addtoRequestQueue(stringRequest);
         // Adding request to request queue
 
@@ -169,7 +146,7 @@ public class AttendanceCasingActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                AttendanceCasingActivity.this.adapter.getFilter().filter(cs);
+                AttendanceListActivity.this.adapter.getFilter().filter(cs);
             }
 
             @Override
@@ -192,21 +169,13 @@ public class AttendanceCasingActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 lv.setAdapter(adapter);
                 String value = adapter.getItem(position);
-                SharedPreferences settings = getSharedPreferences("NAMEDEPARTMENTDATE",
-                        MODE_PRIVATE);
-                SharedPreferences.Editor prefEditor = settings.edit();
-                prefEditor.putString("name", value);
-                prefEditor.putString("department", "Casing");
-                prefEditor.putString("databaseDate", DatabaseDate);
-                prefEditor.commit();
-                attendanceDialog = new AttendanceDialog(AttendanceCasingActivity.this);
-                attendanceDialog.show();
-            }
-        });
-        dateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(Dialog_id);
+                Intent intent = new Intent(AttendanceListActivity.this, AttendancePersonwiseDetails.class);
+                intent.putExtra("startdate", startdate);
+                intent.putExtra("enddate", enddate);
+                intent.putExtra("department", departmentname);
+                intent.putExtra("name", value);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -233,13 +202,7 @@ public class AttendanceCasingActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, AttendanceBaseActivity.class));
+        startActivity(new Intent(this, AdminAttendanceBaseActivity.class));
         finish();
-    }
-
-    @Override
-    @Deprecated
-    protected Dialog onCreateDialog(int id) {
-        return new DatePickerDialog(this, datePickerListener, dyear, month, day);
     }
 }

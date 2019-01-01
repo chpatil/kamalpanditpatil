@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.kpp.kamalpanditpatil.R;
 import com.kpp.kamalpanditpatil.ui.activities.admin.Attendance.AdminAttendanceBaseActivity;
+import com.kpp.kamalpanditpatil.ui.activities.login_page;
 
 public class AdminMainMenu extends AppCompatActivity {
 //    @BindView(R.id.adminMainMenuToolbar)
@@ -55,4 +56,9 @@ public class AdminMainMenu extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, login_page.class));
+        finish();
+    }
 }

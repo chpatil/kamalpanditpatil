@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AttendanceDetailActivity extends AppCompatActivity {
+public class AttendanceDatewiseDetailActivity extends AppCompatActivity {
     ArrayList<String> workerDataList;
     ArrayList<String> workerDataTransferList;
     String date, department, code, message;
@@ -51,10 +51,10 @@ public class AttendanceDetailActivity extends AppCompatActivity {
         pDiaalog.setMessage("Fetching data ...");
         pDiaalog.show();
         workerDataList.clear();
-        ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_admin_attendance_detail_layout, lv1, false);
+        ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_admin_attendance_datewise_detail_layout, lv1, false);
         // Add header view to the ListView
         lv1.addHeaderView(headerView);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.ATTENDACEADMINDATEWISE, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, constants.ATTENDANCEADMINDATEWISE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -63,7 +63,7 @@ public class AttendanceDetailActivity extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
                     code = jsonObject.getString("code");
                     if (code.equals("0")) {
-                        Toast.makeText(AttendanceDetailActivity.this, "Unable to fetch data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AttendanceDatewiseDetailActivity.this, "Unable to fetch data", Toast.LENGTH_SHORT).show();
                     } else if (code.equals("1")) {
                         JSONArray jAry = new JSONArray(response);
                         for (int i = 1; i < jAry.length(); i++) {
@@ -71,7 +71,7 @@ public class AttendanceDetailActivity extends AppCompatActivity {
                             String name = jsonObject1.get("name") + "__" + jsonObject1.get("shift") + "__" + jsonObject1.get("dailyorpiece");
                             workerDataList.add(name);
                         }
-                        adapter = new LstViewDatewiseAdpater(AttendanceDetailActivity.this, R.layout.rowlayout_admin_atttendance_datewise_detail, R.id.names, workerDataList);
+                        adapter = new LstViewDatewiseAdpater(AttendanceDatewiseDetailActivity.this, R.layout.rowlayout_admin_atttendance_datewise_detail, R.id.names, workerDataList);
                         lv1.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
 
@@ -93,6 +93,7 @@ public class AttendanceDetailActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                Toast.makeText(AttendanceDatewiseDetailActivity.this, "Please check your net connection", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

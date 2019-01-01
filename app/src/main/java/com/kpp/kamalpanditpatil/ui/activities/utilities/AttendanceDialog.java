@@ -75,7 +75,7 @@ public class AttendanceDialog extends Dialog {
 
 
         ArrayAdapter<String> adapetovertime_role = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_item, constants.otshiftString);
+                android.R.layout.simple_spinner_item, constants.othoursString);
         adaptershift_role
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         otshift.setAdapter(adapetovertime_role);
@@ -137,7 +137,7 @@ public class AttendanceDialog extends Dialog {
                         datamap.put("shift", shift1);
                         datamap.put("dailyorpiece", piecerate);
                         datamap.put("overtime", overtime1);
-                        datamap.put("overtimeshift", otShift);
+                        datamap.put("othours", otShift);
                         datamap.put("date", databaseDate);
                         datamap.put("department", departmentname);
 

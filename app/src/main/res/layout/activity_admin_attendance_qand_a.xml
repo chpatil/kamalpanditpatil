@@ -8,16 +8,61 @@
         android:id="@+id/adminattendanceQandAworkerToolbar"
         layout="@layout/toolbar" />
 
+    <TextView
+        android:id="@+id/textViewAdminQandADatewise"
+        style="@style/ThemeOverlay.MyTextDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DATEWISE"
+        android:textSize="24sp" />
+
     <Button
         android:id="@+id/adminAttendanceQandAdateButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/adminAttendanceQandAdatewiseButton"
+        android:id="@+id/adminAttendanceQnandAdatewiseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="DATE WISE ATTENDANCE " />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textViewAdminQandApersonwise"
+        style="@style/ThemeOverlay.MyTextDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PERSONWISE"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/adminAttendanceQandAdaterangeButton1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/adminAttendanceQandAdaterangeButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/adminAttendanceQandApersonwisewiseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PERSONWISE WISE ATTENDANCE " />
+
+    <Button
+        android:id="@+id/adminAttendanceQandAOvertimewisewiseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OVERTIMEWISE WISE ATTENDANCE " />
 
 
 </LinearLayout>

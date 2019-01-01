@@ -203,5 +203,9 @@ public class worker_list extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, AdminMainMenu.class));
     }
+}
 
